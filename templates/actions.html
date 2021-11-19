@@ -20,13 +20,17 @@
 
 <div class="container is-max-desktop">
     <div class="notification is-primary">
-        <a href="{{ url_for('main.stop_manager') }}" class="button is-outlined is-large is-fullwidth">Stop Manager</a>
+        <a href="{{ url_for('main.stop_manager') }}" class="button is-outlined is-large is-fullwidth" onclick="alert('This will terminate all instances, including the manager. Are you sure you want to proceed?')">
+            Stop Manager
+        </a>
     </div>
 </div>
 
 <div class="container is-max-desktop">
     <div class="notification is-primary">
-        <a href="{{ url_for('main.destroy_app_data') }}" class="button is-outlined is-large is-fullwidth">Delete Application Data</a>
+        <a href="{{ url_for('main.destroy_app_data') }}" class="button is-outlined is-large is-fullwidth" onclick="alert('This will delete all application data, including stored images. Are you sure you want to proceed?')">
+            Delete Application Data
+        </a>
     </div>
 </div>
 
