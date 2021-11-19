@@ -13,7 +13,7 @@ Start terminal from one level above project directory <br>
 pip install flask flask-sqlalchemy flask-login
 
 ### Running UP DB interactions -
-Log onto python interpreter one level above project directory
+Log onto python interpreter one level above project directory <br>
 `from manager_app import db, create_app, models, models.User` <br>
 `from manager_app.models import User` <br>
 `db.create_all(app=create_app())` <br>
@@ -21,7 +21,7 @@ Log onto python interpreter one level above project directory
 `db.app = create_app()` <br>
 `db.session.add(manager)` <br>
 `db.session.commit()` <br>
-To check if manager is added properly:
+To check if manager is added properly: <br>
 `user= User.query.all()[0]` <br>
 `print (user.id, user.email, user.password, user.name)` <br>
 To delete : <br>

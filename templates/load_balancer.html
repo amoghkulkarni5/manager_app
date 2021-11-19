@@ -2,6 +2,44 @@
 
 {% block content %}
 <h1 class="title">
-    Load Balancing functionality will go here
+    Add list of instances here and whatever else is required to show in table <br>
 </h1>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="message is-info has-text-left">
+    <div class="message-body has-text-left">
+        {{ messages[0] }}
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<table class="table is-fullwidth is-bordered is-hoverable is-striped">
+    <thead>
+    <tr>
+        <th><abbr title="EC2 Instance ID">ID</abbr></th>
+        <th>Actions</th>
+    </thead>
+    <!-- Loop to iterate through list of instances goes here -->
+    <tbody>
+        <tr>
+            <th> instance_id </th>
+            <td>
+                <form method="POST" action="/remove-worker">
+                    <input type="hidden" id="instance_id" name="instance_id" value="sudarshan-add-instance-id-here">
+                    <input class="button is-danger is-outlined" type="submit" value="Remove" />
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="container is-max-desktop">
+    <div class="notification is-primary">
+        <a href="{{ url_for('main.add_worker') }}" class="button is-outlined is-large is-fullwidth">Add Instance</a>
+    </div>
+</div>
+
+
 {% endblock %}

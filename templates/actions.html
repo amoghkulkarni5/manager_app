@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="block has-background-grey-lighter has-text-danger py-5">
+    <h2 class="is-size-3">Warning</h2>
+    These actions may have irrevocable consequences. <br>
+    Consider carefully before executing. <br>
+</div>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="message is-info has-text-left">
+    <div class="message-body has-text-left">
+        {{ messages[0] }}
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<div class="container is-max-desktop">
+    <div class="notification is-primary">
+        <a href="{{ url_for('main.stop_manager') }}" class="button is-outlined is-large is-fullwidth">Stop Manager</a>
+    </div>
+</div>
+
+<div class="container is-max-desktop">
+    <div class="notification is-primary">
+        <a href="{{ url_for('main.destroy_app_data') }}" class="button is-outlined is-large is-fullwidth">Delete Application Data</a>
+    </div>
+</div>
+
+{% endblock %}
