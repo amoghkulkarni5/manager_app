@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    Image Storage Webapp (ISW) Manager
+</h1>
+<h2 class="subtitle">
+    AWS Manager functionality for Image Storage Webapp.
+</h2>
+
+<h3 class="is-family-secondary">
+    If you are the manager,
+    <a href="{{ url_for('auth.login') }}" class="has-text-info has-text-weight-semibold">
+        login now
+    </a>
+    with your credentials
+</h3>
+{% endblock %}

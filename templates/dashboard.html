@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="message is-info has-text-left">
+    <div class="message-body has-text-left">
+        {{ messages[0] }}
+    </div>
+</div>
+{% endif %}
+{% endwith %}
+
+<h1 class="title">
+    Charts go here
+</h1>
+{% endblock %}
