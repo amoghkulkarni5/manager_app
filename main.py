@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, flash, request
 from . import db
 from flask_login import login_user, logout_user, login_required, current_user
+from .models import Configuration
 
 main = Blueprint('main', __name__)
 
@@ -55,4 +56,35 @@ def remove_worker():
     instance_id = request.form['instance_id']
     flash(f"Remove worker {instance_id} then redirect here")
     return render_template('load_balancer.html')
+
+
+@main.route('/configuration', methods=['GET', 'POST'])  # Modify configuration variables
+@login_required
+def configuration():
+    if request.method == 'POST':
+        grow_cpu_threshold = request.form.get('grow_cpu_threshold')
+        shrink_cpu_threshold = request.form.get('shrink_cpu_threshold')
+        grow_ratio = request.form.get('grow_ratio')
+        shrink_ratio = request.form.get('shrink_ratio')
+        config = Configuration.query.all()[0]
+
+        if (grow_cpu_threshold == "") or (shrink_cpu_threshold == "") or (grow_ratio == "") or (shrink_ratio == ""):
+            flash("Please enter all 4 values.")
+            return render_template('configuration.html', configuration=config)
+
+        if (float(grow_cpu_threshold) <= 0) or (float(shrink_cpu_threshold) <= 0) or (float(grow_ratio) <= 0) or (float(shrink_ratio) <= 0):
+            flash("Values have to be positive.")
+            return render_template('configuration.html', configuration=config)
+
+        config.grow_cpu_threshold = float(grow_cpu_threshold)
+        config.shrink_cpu_threshold = float(shrink_cpu_threshold)
+        config.grow_ratio = float(grow_ratio)
+        config.shrink_ratio = float(shrink_ratio)
+        db.session.commit()
+
+        flash("Configuration of Autoscaler changed successfully.")
+        return render_template('configuration.html', configuration=config)
+
+    current_configuration = Configuration.query.all()[0]
+    return render_template('configuration.html', configuration=current_configuration)
 

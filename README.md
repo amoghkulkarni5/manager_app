@@ -14,15 +14,19 @@ pip install flask flask-sqlalchemy flask-login
 
 ### Running UP DB interactions -
 Log onto python interpreter one level above project directory <br>
-`from manager_app import db, create_app, models, models.User` <br>
-`from manager_app.models import User` <br>
+`from manager_app import db, create_app, models` <br>
+`from manager_app.models import User, Configuration` <br>
 `db.create_all(app=create_app())` <br>
 `manager = User(name='Amogh', email='amoghkulkarni5@gmail.com', password='amogh')` <br>
+`configuration= Configuration(grow_cpu_threshold=1.0, shrink_cpu_threshold=1.0, grow_ratio=1.0, shrink_ratio=1.0)` <br>
 `db.app = create_app()` <br>
 `db.session.add(manager)` <br>
+`db.session.add(configuration)` <br>
 `db.session.commit()` <br>
-To check if manager is added properly: <br>
-`user= User.query.all()[0]` <br>
+####To check if data is added properly: <br>
+`user = User.query.all()[0]` <br>
+`ac = Configuration.query.all()[0]` <br>
 `print (user.id, user.email, user.password, user.name)` <br>
-To delete : <br>
+`print (ac.grow_cpu_threshold, ac.shrink_cpu_threshold, ac.grow_ratio, ac.shrink_ratio)` <br>
+####To delete : <br>
 `db.drop_all(app=create_app())` <br>
